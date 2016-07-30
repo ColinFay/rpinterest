@@ -13,7 +13,7 @@ Install this package directly in R :
 devtools::install_github("ColinFay/rpinterest")
 ```
 
-##How rgeoapi works
+##How rpinterest works
 
 The version 0.1.0 works with seven functions. Which are :  
 
