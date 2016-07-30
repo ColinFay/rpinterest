@@ -25,7 +25,7 @@ The version 0.1.0 works with seven functions. Which are :
 
 * `BoardSpecByName` Get informations about a pinterest board using its name.
 
-* `PinSpec` Get informations about a pinterest pin using its ID.
+* `PinSpecByID` Get informations about a pinterest pin using its ID.
 
 * `UserSpecByID` Get informations about a pinterest user using its ID.
 
