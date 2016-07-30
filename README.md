@@ -3,7 +3,7 @@ This package requests informations from the Pinterest API.
 
 ##Access the API 
 
-In order to get informations from the API, you first need to get an access token -- [Pinterest token generator](https://developers.pinterest.com/tools/access_token/).
+In order to get informations from the API, you first need to get an access token from the [Pinterest token generator](https://developers.pinterest.com/tools/access_token/).
 
 ##Install rpinterest
 
