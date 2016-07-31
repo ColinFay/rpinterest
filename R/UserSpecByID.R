@@ -81,7 +81,7 @@ UserSpecByID <- function(userID, token) {
     } else {
       lk <- content$counts$likes
     }
-    identity <- data.frame(id = ci, name = userna, bio = bi, full_name = nam, account_type = at, url = cu, created_at = ca, pins = cp, following = fol, followers = folr, boards = brd, likes = lk)
+    identity <- data.frame(id = ci, name = userna, bio = bi, full_name = nam, account_type = at, url = cu, created_at = ca, pins = cp, following = fol, followers = folr, boards = brd, likes = lk, stringsAsFactors = FALSE)
     return(identity)
   } else {
     print("Request Error")
