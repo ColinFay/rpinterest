@@ -81,7 +81,7 @@ if (user$status_code == 200){
   } else {
     lk <- content$counts$likes
   }
-  identity <- data.frame(id = ci, names = userna, bio = bi, full_name = nam, account_type = at, url = cu, created_at = ca, pins = cp, following = fol, followers = folr, boards = brd, likes = lk)
+  identity <- data.frame(id = ci, names = userna, bio = bi, full_name = nam, account_type = at, url = cu, created_at = ca, pins = cp, following = fol, followers = folr, boards = brd, likes = lk, stringsAsFactors = FALSE)
   return(identity)
 } else {
   print("Request Error")
