@@ -67,7 +67,7 @@ BoardSpecByName <- function(user, board, token) {
     } else {
       pfoll <- content$counts$followers
     }
-    identity <- data.frame(name = na, board_id = bi, board_desc = desc, creator_name = cn, creator_url = cu, creator_id = cid, created_at = created, pins_count = pc, pins_collaborators = colab, pins_followers = pfoll)
+    identity <- data.frame(name = na, board_id = bi, board_desc = desc, creator_name = cn, creator_url = cu, creator_id = cid, created_at = created, pins_count = pc, pins_collaborators = colab, pins_followers = pfoll, stringsAsFactors = FALSE)
     return(identity)
   } else {
     print("Request Error")
