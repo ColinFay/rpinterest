@@ -97,7 +97,7 @@ PinSpecByID <- function(pinID, token) {
     } else {
       pins_repin <- content$counts$repins
     }
-    identity <- data.frame(pin_id = pin_i, creator_name = creator_nam, creator_id = creator_i, type = typ, original_link = original_lin, pin_note = pin_not, pin_color = pin_colo, pin_link = pin_lin, pin_board_name = pin_board_nam, pin_board_url = pin_board_ur, pin_board_id = pin_board_i, pins_likes = pins_like, pins_comments = pins_comment, pins_repins = pins_repin, attribution_title = attrtit, attribution_author = attraut, attribution_url = attrurl, attribution_provider = attrprov)
+    identity <- data.frame(pin_id = pin_i, creator_name = creator_nam, creator_id = creator_i, type = typ, original_link = original_lin, pin_note = pin_not, pin_color = pin_colo, pin_link = pin_lin, pin_board_name = pin_board_nam, pin_board_url = pin_board_ur, pin_board_id = pin_board_i, pins_likes = pins_like, pins_comments = pins_comment, pins_repins = pins_repin, attribution_title = attrtit, attribution_author = attraut, attribution_url = attrurl, attribution_provider = attrprov, stringsAsFactors = FALSE)
     return(identity)
   } else {
     print("Request Error")
