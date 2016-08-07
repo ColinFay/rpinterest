@@ -7,9 +7,9 @@
 UserSpecByID(userID, token)
 }
 \arguments{
-\item{token}{a character string with an access token generated at \url{https://developers.pinterest.com/tools/access_token/}}
+\item{userID}{a character string with a user ID.}
 
-\item{user}{a character string with a user ID.}
+\item{token}{a character string with an access token generated at \url{https://developers.pinterest.com/tools/access_token/}}
 }
 \value{
 Returns a data.frame with user informations.
@@ -18,7 +18,7 @@ Returns a data.frame with user informations.
 Get informations about a pinterest user using its ID.
 }
 \details{
-Takes a user ID and an access token.
+Takes a user ID and an access token, returns a data.frame.
 }
 \examples{
 UserSpecByID(user = "42080715176677612", token = token)

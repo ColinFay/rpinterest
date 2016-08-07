@@ -18,7 +18,7 @@ Returns a data.frame with user informations.
 Get informations about a pinterest user using its ID.
 }
 \details{
-Takes a user ID and an access token.
+Takes a user ID and an access token, returns a data.frame.
 }
 \examples{
 UserSpecByName(user = "colinfay", token = token)
