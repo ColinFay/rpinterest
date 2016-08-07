@@ -11,66 +11,45 @@
 #'@examples
 #'BoardSpecByName(user = "colinfay", board = "blanc-mon-amour", token = token)
 
-BoardSpecByName <- function(user, board, token) {
+BoardSpecByName <- function(user, board, token){
+  . <- NULL 
+  default <- data.frame(name = vector("character"), 
+                        board_id = vector("character"), 
+                        board_desc = vector("character"), 
+                        creator_first_name = vector("character"), 
+                        creator_last_name = vector("character"), 
+                        creator_url = vector("character"), 
+                        creator_id = vector("character"), 
+                        created_at = vector("character"), 
+                        pins_count = vector("character"), 
+                        pins_collaborators = vector("character"), 
+                        pins_followers = vector("character"))
   url <- paste0("https://api.pinterest.com/v1/boards/", user, "/", board, "/?access_token=", token, "&fields=id%2Cname%2Curl%2Ccounts%2Ccreated_at%2Ccreator%2Cdescription%2Cimage%2Cprivacy%2Creason")
   board <- httr::GET(url)
   if (board$status_code == 200){
     content <- rjson::fromJSON(rawToChar(board$content))
     content <- content$data
-    if(is.null(content$name)) {
-      na <- NA
-    } else {
-      na <- content$name
-    }
-    if(is.null(content$id)) {
-      bi <- NA
-    } else {
-      bi <- content$id
-    }
-    if(is.null(content$description)) {
-      desc <- NA
-    } else {
-      desc <- content$description
-    }
-    if(is.null(content$creator$first_name)) {
-      cn <- NA
-    } else {
-      cn <- paste0(content$creator$first_name, " ", content$creator$last_name)
-    }
-    if(is.null(content$creator$url)) {
-      cu <- NA
-    } else {
-      cu <- content$creator$url
-    }
-    if(is.null(content$creator$id)) {
-      cid <- NA
-    } else {
-      cid <- content$creator$id
-    }
-    if(is.null(content$created_at)) {
-      created <- NA
-    } else {
-      created <- content$created_at
-    }
-    if(is.null(content$counts$pins)) {
-      pc <- NA
-    } else {
-      pc <- content$counts$pins
-    }
-    if(is.null(content$counts$collaborators)) {
-      colab <- NA
-    } else {
-      colab <- content$counts$pins
-    }
-    if(is.null(content$counts$followers)) {
-      pfoll <- NA
-    } else {
-      pfoll <- content$counts$followers
-    }
-    identity <- data.frame(name = na, board_id = bi, board_desc = desc, creator_name = cn, creator_url = cu, creator_id = cid, created_at = created, pins_count = pc, pins_collaborators = colab, pins_followers = pfoll, stringsAsFactors = FALSE)
+    contentlist <- list()
+    contentlist[[1]] <- content
+    identity <- lapply(contentlist, function(obj) {
+      data.frame(name = obj$name %||% NA, 
+                 board_id = obj$id %||% NA, 
+                 board_desc = obj$description %||% NA, 
+                 creator_first_name = obj$creator$first_name %||% NA, 
+                 creator_last_name = obj$creator$last_name %||% NA, 
+                 creator_url = obj$creator$url %||% NA, 
+                 creator_id = obj$creator$id %||% NA, 
+                 created_at = obj$created_at %||% NA, 
+                 pins_count = obj$counts$pins %||% NA, 
+                 pins_collaborators = obj$counts$collaborators %||% NA, 
+                 pins_followers = obj$counts$followers %||% NA, 
+                 stringsAsFactors = FALSE)
+    }) %>% do.call(rbind, .)  
     return(identity)
   } else {
-    print("Request Error")
+    warning("Request error (was ", user, board,")")
+    identity <- default
+    return(identity)
   }
 }
-
+  

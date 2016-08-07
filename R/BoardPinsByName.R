@@ -12,6 +12,26 @@
 #'BoardPinsByName(user = "colinfay", board = "blanc-mon-amour", token = token)
 
 BoardPinsByName <- function(user, board, token) {
+  . <- NULL 
+  default <- data.frame(pin_id = vector("character"), 
+                        creator_name = vector("character"), 
+                        creator_id = vector("character"), 
+                        type = vector("character"), 
+                        original_link = vector("character"), 
+                        pin_note = vector("character"), 
+                        pin_color = vector("character"), 
+                        pin_link = vector("character"), 
+                        pin_board_name = vector("character"), 
+                        pin_board_url = vector("character"), 
+                        pin_board_id = vector("character"), 
+                        pins_likes = vector("character"), 
+                        pins_comments = vector("character"), 
+                        pins_repins = vector("character"), 
+                        attribution_title = vector("character"), 
+                        attribution_author = vector("character"), 
+                        attribution_url = vector("character"), 
+                        attribution_provider = vector("character"), 
+                        stringsAsFactors = FALSE)
   url <- paste0("https://api.pinterest.com/v1/boards/", user, "/", board, "/pins/?access_token=", token, "&fields=id%2Clink%2Cnote%2Curl%2Cattribution%2Ccolor%2Cboard%2Ccounts%2Ccreated_at%2Ccreator%2Cimage%2Cmedia%2Cmetadata%2Coriginal_link")
   name <- httr::GET(url)
   if (name$status_code == 200){
@@ -26,95 +46,32 @@ BoardPinsByName <- function(user, board, token) {
         break
       }
     }
-    identity = data.frame()
-    for(i in 1:length(contentdata)){
-      pin_now <- contentdata[[i]]
-      if(is.null(pin_now$attribution)) {
-        attrtit <- NA
-        attraut <- NA
-        attrurl <- NA
-        attrprov <- NA
-      } else {
-        attrtit <- pin_now$attribution$title
-        attraut <- pin_now$attribution$author_name
-        attrurl <- pin_now$attribution$author_url
-        attrprov <- pin_now$attribution$provider_name
-      }
-      if(is.null(pin_now$id)) {
-        pin_i <- NA
-      } else {
-        pin_i <- pin_now$id
-      }
-      if(is.null(pin_now$creator$first_name)) {
-        creator_nam <- NA
-      } else {
-        creator_nam <- paste0(pin_now$creator$first_name, " ", pin_now$creator$last_name)
-      }
-      if(is.null(pin_now$creator$id)) {
-        creator_i <- NA
-      } else {
-        creator_i <- pin_now$creator$id
-      }
-      if(is.null(pin_now$media$type)) {
-        typ <- NA
-      } else {
-        typ <- pin_now$media$type
-      }
-      if(is.null(pin_now$original_link)) {
-        original_lin <- NA
-      } else {
-        original_lin <- pin_now$original_link
-      }
-      if(is.null(pin_now$note)) {
-        pin_not <- NA
-      } else {
-        pin_not <- pin_now$note
-      }
-      if(is.null(pin_now$color)) {
-        pin_colo <- NA
-      } else {
-        pin_colo <- pin_now$color
-      }
-      if(is.null(pin_now$link)) {
-        pin_lin <- NA
-      } else {
-        pin_lin <- pin_now$link
-      }
-      if(is.null(pin_now$board$name)) {
-        pin_board_nam <- NA
-      } else {
-        pin_board_nam <- pin_now$board$name
-      }
-      if(is.null(pin_now$board$url)) {
-        pin_board_ur <- NA
-      } else {
-        pin_board_ur <- pin_now$board$url
-      }
-      if(is.null(pin_now$board$id)) {
-        pin_board_i <- NA
-      } else {
-        pin_board_i <- pin_now$board$id
-      }
-      if(is.null(pin_now$counts$likes)) {
-        pins_like <- NA
-      } else {
-        pins_like <- pin_now$counts$likes
-      }
-      if(is.null(pin_now$counts$comments)) {
-        pins_comment <- NA
-      } else {
-        pins_comment <- pin_now$counts$comments
-      }
-      if(is.null(pin_now$counts$repins)) {
-        pins_repin <- NA
-      } else {
-        pins_repin <- pin_now$counts$repins
-      }
-      obj <- data.frame(pin_id = pin_i, creator_name = creator_nam, creator_id = creator_i, type = typ, original_link = original_lin, pin_note = pin_not, pin_color = pin_colo, pin_link = pin_lin, pin_board_name = pin_board_nam, pin_board_url = pin_board_ur, pin_board_id = pin_board_i, pins_likes = pins_like, pins_comments = pins_comment, pins_repins = pins_repin, attribution_title = attrtit, attribution_author = attraut, attribution_url = attrurl, attribution_provider = attrprov, stringsAsFactors = FALSE)
-      identity <- rbind(identity, obj)
-    }
+    identity <- lapply(contentdata, function(obj){
+      data.frame(pin_id = obj$id %||% NA, 
+                 creator_first_name = obj$creator$first_name %||% NA, 
+                 creator_last_name = obj$creator$last_name %||% NA, 
+                 creator_id = obj$creator$id %||% NA, 
+                 type = obj$media$type %||% NA, 
+                 original_link = obj$original_link %||% NA, 
+                 pin_note = obj$note %||% NA, 
+                 pin_color = obj$color %||% NA, 
+                 pin_link = obj$link %||% NA, 
+                 pin_board_name = obj$board$name %||% NA, 
+                 pin_board_url = obj$board$url %||% NA, 
+                 pin_board_id = obj$board$id %||% NA, 
+                 pins_likes = obj$counts$likes %||% NA, 
+                 pins_comments = obj$counts$comments %||% NA, 
+                 pins_repins = obj$counts$repins %||% NA, 
+                 attribution_title = obj$attribution$title %||% NA, 
+                 attribution_author = obj$attribution$author_name %||% NA, 
+                 attribution_url = obj$attribution$author_url %||% NA, 
+                 attribution_provider = obj$attribution$provider_name %||% NA, 
+                 stringsAsFactors = FALSE)
+    }) %>% do.call(rbind, .)  
     return(identity)
   } else {
-    print("Request Error")
+    warning("Request error (was ", user, board,")")
+    identity <- default
+    return(identity)
   }
 }
