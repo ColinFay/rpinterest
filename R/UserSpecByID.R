@@ -3,7 +3,7 @@
 #'Get informations about a pinterest user using its ID.
 #'
 #'Takes a user ID and an access token, returns a data.frame.
-#'@param user a character string with a user ID.
+#'@param userID a character string with a user ID.
 #'@param token a character string with an access token generated at \url{https://developers.pinterest.com/tools/access_token/}
 #'@return Returns a data.frame with user informations.
 #'@export
