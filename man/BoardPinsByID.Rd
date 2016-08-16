@@ -12,15 +12,15 @@ BoardPinsByID(boardID, token)
 \item{token}{a character string with an access token generated at \url{https://developers.pinterest.com/tools/access_token/}}
 }
 \value{
-Returns a data.frame with informations about all the pins on the board.
+Always returns a data.frame, with a warning when appropriate.
 }
 \description{
-Get informations about all the pins on a pinterest board using the board ID.
+Get information about all the pins on a pinterest board using the board ID.
 }
 \details{
 Takes a board ID and an access token, returns a data.frame.
 }
 \examples{
-BoardPinsByID(boardID = "42080646457333782", token = token)
+BoardPinsByID(boardID = "42080646457333782", token = "your_token")
 }
 

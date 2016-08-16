@@ -12,15 +12,15 @@ UserSpecByName(user, token)
 \item{token}{a character string with an access token generated at \url{https://developers.pinterest.com/tools/access_token/}}
 }
 \value{
-Returns a data.frame with user informations.
+Always returns a data.frame, with a warning when appropriate.
 }
 \description{
-Get informations about a pinterest user using its ID.
+Get information about a pinterest user using the user ID.
 }
 \details{
 Takes a user ID and an access token, returns a data.frame.
 }
 \examples{
-UserSpecByName(user = "colinfay", token = token)
+UserSpecByName(user = "colinfay", token = "your_token")
 }
 

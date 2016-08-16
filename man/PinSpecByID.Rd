@@ -12,15 +12,15 @@ PinSpecByID(pinID, token)
 \item{token}{a character string with an access token generated at \url{https://developers.pinterest.com/tools/access_token/}}
 }
 \value{
-Returns a data.frame with pin informations.
+Always returns a data.frame, with a warning when appropriate.
 }
 \description{
-Get informations about a pinterest pin using its ID.
+Get information about a pinterest pin using the pin ID.
 }
 \details{
 Takes a pin ID and an access token, returns a data.frame.
 }
 \examples{
-PinSpecByID(pinID = "42080577745042298", token = token)
+PinSpecByID(pinID = "42080577745042298", token = "your_token")
 }
 

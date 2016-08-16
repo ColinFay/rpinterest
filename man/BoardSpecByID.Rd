@@ -12,15 +12,15 @@ BoardSpecByID(boardID, token)
 \item{token}{a character string with an access token generated at \url{https://developers.pinterest.com/tools/access_token/}}
 }
 \value{
-Returns a data.frame with board specifications.
+Always returns a data.frame, with a warning when appropriate.
 }
 \description{
-Get informations about a pinterest board using its ID.
+Get information about a pinterest board using the board ID.
 }
 \details{
 Takes a board ID and an access token, returns a data.frame.
 }
 \examples{
-BoardSpecByID(boardID = "42080646457333782", token = token)
+BoardSpecByID(boardID = "42080646457333782", token = "your_token")
 }
 

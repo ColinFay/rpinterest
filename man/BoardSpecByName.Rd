@@ -14,15 +14,15 @@ BoardSpecByName(user, board, token)
 \item{token}{a character string with an access token generated at \url{https://developers.pinterest.com/tools/access_token/}}
 }
 \value{
-Returns a data.frame with board specifications.
+Always returns a data.frame, with a warning when appropriate.
 }
 \description{
-Get informations about a pinterest board using its name.
+Get information about a pinterest board using the board name.
 }
 \details{
 Takes a user name, a board name and an access token.
 }
 \examples{
-BoardSpecByName(user = "colinfay", board = "blanc-mon-amour", token = token)
+BoardSpecByName(user = "colinfay", board = "blanc-mon-amour", token = "your_token")
 }
 

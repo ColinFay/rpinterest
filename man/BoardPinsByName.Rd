@@ -14,15 +14,15 @@ BoardPinsByName(user, board, token)
 \item{token}{a character string with an access token generated at \url{https://developers.pinterest.com/tools/access_token/}}
 }
 \value{
-Returns a data.frame with board specifications.
+Always returns a data.frame, with a warning when appropriate.
 }
 \description{
-Get informations about all the pins on a pinterest board using the board name.
+Get information about all the pins on a pinterest board using the board name.
 }
 \details{
 Takes a user name, a board name and an access token, returns a data.frame.
 }
 \examples{
-BoardPinsByName(user = "colinfay", board = "blanc-mon-amour", token = token)
+BoardPinsByName(user = "colinfay", board = "blanc-mon-amour", token = "your_token")
 }
 
