@@ -1,14 +1,14 @@
 #'Get pin using its ID
 #'
-#'Get informations about a pinterest pin using its ID.
+#'Get information about a pinterest pin using the pin ID.
 #'
 #'Takes a pin ID and an access token, returns a data.frame.
 #'@param pinID a character string with a pin ID.
 #'@param token a character string with an access token generated at \url{https://developers.pinterest.com/tools/access_token/}
-#'@return Returns a data.frame with pin informations.
+#'@return Always returns a data.frame, with a warning when appropriate.
 #'@export
 #'@examples
-#'PinSpecByID(pinID = "42080577745042298", token = token)
+#'PinSpecByID(pinID = "42080577745042298", token = "your_token")
 
 PinSpecByID <- function(pinID, token) {
   . <- NULL 
@@ -60,10 +60,9 @@ PinSpecByID <- function(pinID, token) {
                  attribution_provider = obj$attribution$provider_name %||% NA, 
                  stringsAsFactors = FALSE)
     }) %>% do.call(rbind, .)  
-    return(identity)
   } else {
-    warning("Request error (was ", pinID,")")
+    warning("Request error: your token may not be valid, or your input not an actual pin ID")
     identity <- default
-    return(identity)
   }
+  return(identity)
 }

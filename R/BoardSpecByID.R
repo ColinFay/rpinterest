@@ -1,14 +1,14 @@
 #'Get board using its ID
 #'
-#'Get informations about a pinterest board using its ID.
+#'Get information about a pinterest board using the board ID.
 #'
 #'Takes a board ID and an access token, returns a data.frame.
 #'@param boardID a character string with a board ID.
 #'@param token a character string with an access token generated at \url{https://developers.pinterest.com/tools/access_token/}
-#'@return Returns a data.frame with board specifications.
+#'@return Always returns a data.frame, with a warning when appropriate.
 #'@export
 #'@examples
-#'BoardSpecByID(boardID = "42080646457333782", token = token)
+#'BoardSpecByID(boardID = "42080646457333782", token = "your_token")
 
 BoardSpecByID <- function(boardID, token) {
   . <- NULL 
@@ -44,10 +44,9 @@ BoardSpecByID <- function(boardID, token) {
                  pins_followers = obj$counts$followers %||% NA, 
                  stringsAsFactors = FALSE)
     }) %>% do.call(rbind, .)  
-    return(identity)
   } else {
-    warning("Request error (was ", boardID,")")
+    warning("Request error: your token may not be valid, or your input not an actual board ID")
     identity <- default
-    return(identity)
   }
+  return(identity)
 }

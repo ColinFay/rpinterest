@@ -1,15 +1,15 @@
 #'Get board pins using board name
 #'
-#'Get informations about all the pins on a pinterest board using the board name.
+#'Get information about all the pins on a pinterest board using the board name.
 #'
 #'Takes a user name, a board name and an access token, returns a data.frame.
 #'@param user a character string with a user name.
 #'@param board a character string with a board name.
 #'@param token a character string with an access token generated at \url{https://developers.pinterest.com/tools/access_token/}
-#'@return Returns a data.frame with board specifications.
+#'@return Always returns a data.frame, with a warning when appropriate.
 #'@export
 #'@examples
-#'BoardPinsByName(user = "colinfay", board = "blanc-mon-amour", token = token)
+#'BoardPinsByName(user = "colinfay", board = "blanc-mon-amour", token = "your_token")
 
 BoardPinsByName <- function(user, board, token) {
   . <- NULL 
@@ -37,13 +37,15 @@ BoardPinsByName <- function(user, board, token) {
   if (name$status_code == 200){
     content <- rjson::fromJSON(rawToChar(name$content))
     contentdata <- content$data
-    repeat{
-      url <- content$page$`next`
-      name <- httr::GET(url)
-      content <- rjson::fromJSON(rawToChar(name$content))
-      contentdata <- c(contentdata, content$data)
-      if(is.null(content$page$`next`)){
-        break
+    if(!is.null(content$page$`next`)){
+      repeat{
+        url <- content$page$`next`
+        name <- httr::GET(url)
+        content <- rjson::fromJSON(rawToChar(name$content))
+        contentdata <- c(contentdata, content$data)
+        if(is.null(content$page$`next`)){
+          break
+        }
       }
     }
     identity <- lapply(contentdata, function(obj){
@@ -68,10 +70,9 @@ BoardPinsByName <- function(user, board, token) {
                  attribution_provider = obj$attribution$provider_name %||% NA, 
                  stringsAsFactors = FALSE)
     }) %>% do.call(rbind, .)  
-    return(identity)
   } else {
-    warning("Request error (was ", user, board,")")
+    warning("Request error: your token may not be valid, or your input not an actual board name")
     identity <- default
-    return(identity)
   }
+  return(identity)
 }

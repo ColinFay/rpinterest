@@ -1,14 +1,14 @@
 #'Get a user using its name
 #'
-#'Get informations about a pinterest user using its ID.
+#'Get information about a pinterest user using the user ID.
 #'
 #'Takes a user ID and an access token, returns a data.frame.
 #'@param user a character string with a user ID.
 #'@param token a character string with an access token generated at \url{https://developers.pinterest.com/tools/access_token/}
-#'@return Returns a data.frame with user informations.
+#'@return Always returns a data.frame, with a warning when appropriate.
 #'@export
 #'@examples
-#'UserSpecByName(user = "colinfay", token = token)
+#'UserSpecByName(user = "colinfay", token = "your_token")
 
 UserSpecByName <- function(user, token) {
   . <- NULL 
@@ -48,10 +48,9 @@ UserSpecByName <- function(user, token) {
                  likes = obj$counts$likes %||% NA, 
                  stringsAsFactors = FALSE)
     }) %>% do.call(rbind, .)  
-    return(identity)
   } else {
-    warning("Request error (was ", user,")")
+    warning("Request error: your token may not be valid, or your input not an actual user name")
     identity <- default
-    return(identity)
   }
+  return(identity)
 }

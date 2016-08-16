@@ -1,17 +1,17 @@
 #'Get board pins using board ID
 #'
-#'Get informations about all the pins on a pinterest board using the board ID.
+#'Get information about all the pins on a pinterest board using the board ID.
 #'
 #'Takes a board ID and an access token, returns a data.frame.
 #'@param boardID a character string with a board ID.
 #'@param token a character string with an access token generated at \url{https://developers.pinterest.com/tools/access_token/}
-#'@return Returns a data.frame with informations about all the pins on the board.
+#'@return Always returns a data.frame, with a warning when appropriate.
 #'@export
 #'@importFrom magrittr %>%
 #'@importFrom httr GET
 #'@importFrom rjson fromJSON
 #'@examples
-#'BoardPinsByID(boardID = "42080646457333782", token = token)
+#'BoardPinsByID(boardID = "42080646457333782", token = "your_token")
 
 BoardPinsByID <- function(boardID, token) {
   . <- NULL 
@@ -39,13 +39,15 @@ BoardPinsByID <- function(boardID, token) {
   if (name$status_code == 200){
     content <- rjson::fromJSON(rawToChar(name$content))
     contentdata <- content$data
-    repeat{
-      url <- content$page$`next`
-      name <- httr::GET(url)
-      content <- rjson::fromJSON(rawToChar(name$content))
-      contentdata <- c(contentdata, content$data)
-      if(is.null(content$page$`next`)){
-        break
+    if(!is.null(content$page$`next`)){
+      repeat{
+        url <- content$page$`next`
+        name <- httr::GET(url)
+        content <- rjson::fromJSON(rawToChar(name$content))
+        contentdata <- c(contentdata, content$data)
+        if(is.null(content$page$`next`)){
+          break
+        }
       }
     }
     identity <- lapply(contentdata, function(obj){
@@ -70,10 +72,9 @@ BoardPinsByID <- function(boardID, token) {
                  attribution_provider = obj$attribution$provider_name %||% NA, 
                  stringsAsFactors = FALSE)
     }) %>% do.call(rbind, .)  
-    return(identity)
   } else {
-    warning("Request error (was ", boardID,")")
+    warning("Request error: your token may not be valid, or your input not an actual board ID")
     identity <- default
-    return(identity)
   }
+  return(identity)
 }
