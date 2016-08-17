@@ -1,5 +1,8 @@
 # rpinterest
+
 This package requests information from the Pinterest API.
+
+rpinterest is now on [CRAN](https://cran.r-project.org/web/packages/rpinterest/index.html)
 
 ##Access the API 
 
