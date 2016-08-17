@@ -1,12 +1,13 @@
 Package: rpinterest
 Type: Package
 Title: Access Pinterest API
-Version: 0.3.0
-Date: 2016-08-01
+Version: 0.3.1
+Date: 2016-08-17
 Author: Colin FAY
 Maintainer: Colin FAY <contact@colinfay.me>
 Description: Get information (boards, pins and
-    users) from the Pinterest API.
+    users) from the Pinterest <http://www.pinterest.com>
+    API.
 License: GPL-3
 LazyData: TRUE
 Imports:
