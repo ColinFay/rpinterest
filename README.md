@@ -4,11 +4,11 @@ This package requests information from the Pinterest API.
 
 rpinterest is now on [CRAN](https://cran.r-project.org/web/packages/rpinterest/index.html)
 
-##Access the API 
+## Access the API 
 
 In order to get information from the API, you first need to get an access token from the [Pinterest token generator](https://developers.pinterest.com/tools/access_token/).
 
-##Install rpinterest
+## Install rpinterest
 
 Install this package directly in R : 
 
@@ -16,7 +16,7 @@ Install this package directly in R :
 devtools::install_github("ColinFay/rpinterest")
 ```
 
-##How rpinterest works
+## How rpinterest works
 
 The version 0.1.0 works with seven functions. Which are :  
 
@@ -34,6 +34,6 @@ The version 0.1.0 works with seven functions. Which are :
 
 * `UserSpecNyName` Get information about a pinterest user using the user name.
 
-###Contact
+### Contact
 
 Questions and feedbacks [welcome](mailto:contact@colinfay.me) !
