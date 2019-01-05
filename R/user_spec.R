@@ -16,8 +16,7 @@
 #'}
 
 get_user_spec_by_id <- function(id, token){
-  url <- paste0("https://api.pinterest.com/v1/users/", id, "/?access_token=", token, "&fields=first_name%2Cid%2Clast_name%2Curl%2Caccount_type%2Cusername%2Cbio%2Ccounts%2Ccreated_at%2Cimage")
-  get_user_spec(url)
+  get_user_spec_by_name(id, token)
 }
 
 #'Get board pins using board name
@@ -43,7 +42,6 @@ get_user_spec_by_name <- function(user, token){
 
 #' @importFrom httr GET
 get_user_spec <- function(url){
-  browser()
   check_internet()
   res <- GET(url)
   check_status(res)

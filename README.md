@@ -49,6 +49,15 @@ hour per token.
 
 ## Call the API
 
+## Logged User
+
+### Get informations about the user
+
+``` r
+get_logged_user(token)
+get_logged_user_boards(token)
+```
+
 ### Boards
 
 #### Pins

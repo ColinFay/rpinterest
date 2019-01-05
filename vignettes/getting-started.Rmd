@@ -1,34 +1,19 @@
 ---
-output: github_document
+title: "Getting started"
+author: "Colin Fay"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{getting-started}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
 ---
-
-<!-- README.md is generated from README.Rmd. Please edit that file -->
 
 ```{r setup, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
-  comment = "#>",
-  fig.path = "man/figures/README-",
-  out.width = "100%"
+  comment = "#>"
 )
-```
-
-# rpinterest
-
-The goal of rpinterest is to provide access to the Pinterest API from R. 
-
-## Installation
-
-You can install the released version of rpinterest from [CRAN](https://CRAN.R-project.org) with:
-
-``` r
-install.packages("rpinterest")
-```
-
-Or for the dev version:
-
-``` r
-remotes::install_github("ColinFay/rpinterest")
 ```
 
 ## Getting an Access Token 
@@ -119,7 +104,3 @@ get_user_spec_by_id(id = "42080715176677612", token = token)
 ``` r 
 get_user_spec_by_name(user = "colinfay", token = token)
 ```
-
-## Code of Conduct
-
- Please note that the 'rpinterest' project is released with a [Contributor Code of Conduct](CODE_OF_CONDUCT.md). By contributing to this project, you agree to abide by its terms.
