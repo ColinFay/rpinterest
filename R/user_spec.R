@@ -11,7 +11,9 @@
 #'@importFrom httr GET
 #'@importFrom jsonlite fromJSON
 #'@examples
+#'\dontrun{
 #'get_user_spec_by_id(id = "42080715176677612", token = token)
+#'}
 
 get_user_spec_by_id <- function(id, token){
   url <- paste0("https://api.pinterest.com/v1/users/", id, "/?access_token=", token, "&fields=first_name%2Cid%2Clast_name%2Curl%2Caccount_type%2Cusername%2Cbio%2Ccounts%2Ccreated_at%2Cimage")
@@ -29,7 +31,9 @@ get_user_spec_by_id <- function(id, token){
 #'@return Always returns a data.frame, with a warning when appropriate.
 #'@export
 #'@examples
+#'\dontrun{
 #'get_user_spec_by_name(user = "colinfay", token = token)
+#'}
 
 get_user_spec_by_name <- function(user, token){
   url <- paste0("https://api.pinterest.com/v1/users/", user, "/?access_token=", token, "&fields=first_name%2Cid%2Clast_name%2Curl%2Caccount_type%2Cusername%2Cbio%2Ccounts%2Ccreated_at%2Cimage")

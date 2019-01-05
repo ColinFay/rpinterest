@@ -7,11 +7,9 @@
 get_pin_spec_by_id(id, token)
 }
 \arguments{
-\item{id}{a character string with a board ID.}
+\item{id}{a character string with a pin ID.}
 
 \item{token}{a character string with an access token generated with `pinterest_token()`}
-
-\item{pinID}{a character string with a pin ID.}
 }
 \value{
 Always returns a data.frame, with a warning when appropriate.
@@ -23,5 +21,7 @@ Get information about a pinterest pin using the pin ID.
 Takes a pin ID and an access token, returns a data.frame.
 }
 \examples{
+\dontrun{
 get_pin_spec_by_id(id = "42080577745042298", token = token)
+}
 }

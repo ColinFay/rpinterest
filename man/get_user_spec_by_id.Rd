@@ -21,5 +21,7 @@ Get information about a pinterest user using the user ID.
 Takes a user ID and an access token, returns a data.frame.
 }
 \examples{
+\dontrun{
 get_user_spec_by_id(id = "42080715176677612", token = token)
+}
 }

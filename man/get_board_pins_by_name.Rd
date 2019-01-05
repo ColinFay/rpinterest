@@ -23,5 +23,7 @@ Get information about all the pins on a pinterest board using the board name.
 Takes a user name, a board name and an access token, returns a data.frame.
 }
 \examples{
+\dontrun{
 get_board_pins_by_name(user = "colinfay", board = "violet-mon-amour", token = token)
+}
 }
