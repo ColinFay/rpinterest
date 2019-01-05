@@ -1,0 +1,99 @@
+---
+title: "rpinterest-auth"
+author: "Colin Fay"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{rpinterest-auth}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+This vignette describes the Why and How of the specific `{rpinterest}` authentification method, and presents how to build your own callback page if you need to. 
+
+## Why a custom authentification method?
+
+Pinterest authentification is done in two steps: 
+
+1. Making a GET from your browser with an URL containing the API url, your callback url, and your app_id and getting back an authorization code.
+2. POSTing to the API, along with your app_id and app_secret, the authorization code returned by step 1. 
+
+### Getting an authorization code
+
+How does it work? To get this code, you'll need to access the API, log to Pinterest, and once the loggin is done, your browser navigates to `callback_url/?state=XXX&code=XXX` (the callback url you've provided, with parameters). 
+
+### Specifying a callback in https
+
+Classically, with `{httr}`, you're providing `http://localhost:1410` as a `callback_url` to the API, and R listens to `http://localhost:1410`. Once the login is performed, you're redirected to localhost, R sees `http://localhost:1410?state=XXX&code=XXX`, and gets the authorization code from this URL. 
+
+But here's the catch: Pinterest requires a callback in https, and (as far as I can tell), it's impossible to watch over https on localhost. So how can we get this authorization code?
+
+That's the main goal of `https://colinfay.me/rpinterestcallback/`: provide an online & https served page for getting this authorization code. How does it work? JavaScript allows to parse the current page URL, so it's pretty easy to get the code from the url with parameters. Once the code is captured, JavaScript reinject it inside the page. 
+
+The page is hosted on GitHub, and it's served in https, so it can be used as a callback page for `{rpinterest}`.
+
+[See the code of the page](https://github.com/ColinFay/rpinterestcallback)
+
+### POSTing the authorization code 
+
+Then, when your authorization code comes back to R, R sends a POST request to the Pinterest API, with your `app_id` and `app_secret`. Then, the Pinterest API sends a token to R. This series of characters is the token you'll use when making further calls to the API. 
+
+## Is it secured?
+
+Yes, and because of several things: 
+
+- R *does not* listens to what happens in the browser. YOU have to copy and paste the code back. 
+- Everything happens in your browser through https, and nothing is stored either in the package or in the GitHub repo.
+- Even if this authorization code was stored somewhere, it is basically useless because: it can only be used once, and only with the app_id and app_secret. If you look into the code from `pinterest_token`, you'll see that when the browser is open, your `app_secret` is not shared. 
+
+## Create your own callback page
+
+If for some reasons you want to create your own callback page: 
+
+- Choose somewhere to deploy the page which can be served with https.
+- Put there an index.html with this code (or a variation of if): 
+
+``` html
+<html>
+
+<head>
+<title>rpinterest code</title>
+</head>
+
+<body>
+
+<h2>{rpinterest} connexion code</h2>
+
+<p>Paste this code back into R:</p>
+
+<p id = "code">error</p>
+
+<script>
+  // from https://stackoverflow.com/questions/8486099/how-do-i-parse-a-url-query-parameters-in-javascript
+  function getJsonFromUrl(url) {
+    if(!url) url = location.search;
+    var query = url.substr(1);
+    var result = {};
+    query.split("&").forEach(function(part) {
+      var item = part.split("=");
+      result[item[0]] = decodeURIComponent(item[1]);
+    });
+    return result;
+  }
+  var url = location.href
+  var res = getJsonFromUrl(url)
+  document.getElementById("code").innerHTML = res["code"]
+</script>
+
+</body>
+</html>
+```
+
+- Use this page as the callback uri when creating your application. 
