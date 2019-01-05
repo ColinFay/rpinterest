@@ -10,15 +10,16 @@ check_internet <- function(){
 #' @importFrom attempt message_if_not
 
 check_status <- function(res){
-  message_if_not(.x = status_code(res), 
-              .p = ~ .x == 200,
-              msg = "The API returned an error")
-  json_raw_to_char(res$content)
-  stop()
+  
+  if (status_code(res) != 200){
+    print(json_raw_to_char(res$content))
+    stop("The API returned an error")
+  }
+
 }
 
 #' @importFrom jsonlite fromJSON
 json_raw_to_char <- function(content){
-  fromJSON(rawToChar(content))
+  fromJSON(rawToChar(content), flatten = TRUE)
 }
 
