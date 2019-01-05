@@ -20,7 +20,7 @@ pinterest_token <- function(app, app_id, app_secret, verbose = TRUE,
   if (verbose){
     message("R will open your web browser, and invite you to log into pinterest.")
     message("Once the login is done, you'll land on a page giving your a code.")
-    message("Copy and paste the url from this page here.")
+    message("Copy and paste the code from this page here.")
   }
   
   # Getting app_id & callback
