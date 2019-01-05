@@ -10,6 +10,7 @@ use_package("jsonlite")
 use_package("curl")
 use_package("attempt")
 use_package("data.table")
+use_package("glue")
 
 usethis::use_vignette("rpinterest-auth")
 

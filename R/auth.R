@@ -9,8 +9,8 @@
 #' @return an access token
 #' @export
 #'
-#' @importFrom glue glue
 #' @importFrom httr POST
+#' @importFrom glue glue
 #' @importFrom utils browseURL
 
 pinterest_token <- function(app, app_id, app_secret, verbose = TRUE, 
