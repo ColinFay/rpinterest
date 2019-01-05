@@ -21,5 +21,7 @@ Get information about all the pins on a pinterest board using the board ID.
 Takes a board ID and an access token, returns a data.frame.
 }
 \examples{
+\dontrun{
 get_board_pins_by_id(id = "42080646457333782", token = token)
+}
 }

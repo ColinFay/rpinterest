@@ -21,5 +21,7 @@ Get information about all the pins on a pinterest board using the board name.
 Takes a user name, a board name and an access token, returns a data.frame.
 }
 \examples{
+\dontrun{
 get_user_spec_by_name(user = "colinfay", token = token)
+}
 }
