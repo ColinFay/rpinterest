@@ -16,7 +16,8 @@ Imports:
     curl,
     httr,
     jsonlite,
-    magrittr
+    magrittr,
+    data.table
 Suggests: 
     knitr,
     rmarkdown,
