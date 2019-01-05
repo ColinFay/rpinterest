@@ -1,0 +1,8 @@
+^Meta$
+^doc$
+^CODE_OF_CONDUCT\.md$
+^README\.Rmd$
+^LICENSE\.md$
+^devstuffs\.R$
+^.*\.Rproj$
+^\.Rproj\.user$
