@@ -1,6 +1,7 @@
 usethis::use_build_ignore("devstuffs.R")
 
 colin::init_docs()
+usethis::use_code_of_conduct()
 colin::new_r_file("boards")
 
 library(usethis)

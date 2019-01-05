@@ -8,7 +8,6 @@
 #'
 #'@return Always returns a data.frame, with a warning when appropriate.
 #'@export
-#'@importFrom magrittr %>%
 #'@importFrom httr GET
 #'@importFrom jsonlite fromJSON
 #'@examples
@@ -38,10 +37,11 @@ get_user_spec_by_name <- function(user, token){
 }
 
 
+#' @importFrom httr GET
 get_user_spec <- function(url){
   browser()
   check_internet()
-  res <- httr::GET(url)
+  res <- GET(url)
   check_status(res)
   content <- json_raw_to_char(res$content)$data
   

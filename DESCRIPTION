@@ -14,10 +14,9 @@ License: MIT + file LICENSE
 Imports:
     attempt,
     curl,
+    data.table,
     httr,
-    jsonlite,
-    magrittr,
-    data.table
+    jsonlite
 Suggests: 
     knitr,
     rmarkdown,

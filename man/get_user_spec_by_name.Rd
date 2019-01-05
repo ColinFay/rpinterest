@@ -4,14 +4,12 @@
 \alias{get_user_spec_by_name}
 \title{Get board pins using board name}
 \usage{
-get_user_spec_by_name(name, token)
+get_user_spec_by_name(user, token)
 }
 \arguments{
-\item{token}{a character string with an access token generated with `pinterest_token()`}
-
 \item{user}{a character string with a user name.}
 
-\item{board}{a character string with a board name.}
+\item{token}{a character string with an access token generated with `pinterest_token()`}
 }
 \value{
 Always returns a data.frame, with a warning when appropriate.

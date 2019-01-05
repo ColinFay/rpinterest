@@ -7,7 +7,7 @@
 get_user_spec_by_id(id, token)
 }
 \arguments{
-\item{id}{a character string with an user ID.}
+\item{id}{a character string with a user ID.}
 
 \item{token}{a character string with an access token generated with `pinterest_token()`}
 }

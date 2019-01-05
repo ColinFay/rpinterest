@@ -23,5 +23,5 @@ Get information about a pinterest pin using the pin ID.
 Takes a pin ID and an access token, returns a data.frame.
 }
 \examples{
-get_pin_spec_by_id(id = "42080577745042298", token = "your_token")
+get_pin_spec_by_id(id = "42080577745042298", token = token)
 }

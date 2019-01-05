@@ -8,7 +8,6 @@
 #'
 #'@return Always returns a data.frame, with a warning when appropriate.
 #'@export
-#'@importFrom magrittr %>%
 #'@importFrom httr GET
 #'@importFrom jsonlite fromJSON
 #'@examples
@@ -39,10 +38,12 @@ get_board_pins_by_name <- function(user, board, token){
 }
 
 
+#' @importFrom data.table rbindlist
+#' @importFrom httr GET
 get_board_pins <- function(url){
   check_internet()
   #browser()
-  res <- httr::GET(url)
+  res <- GET(url)
   check_status(res)
   content <- json_raw_to_char(res$content)
   contentdata <- content$data
@@ -50,10 +51,10 @@ get_board_pins <- function(url){
   if(!is.null(content$page$`next`)){
     repeat{
       url <- content$page$`next`
-      res <- httr::GET(url)
+      res <- GET(url)
       check_status(res)
       content <- json_raw_to_char(res$content)
-      contentdata <- data.table::rbindlist(
+      contentdata <- rbindlist(
         list(contentdata, content$data), 
         fill = TRUE)
       if(is.null(content$page$`next`)){
