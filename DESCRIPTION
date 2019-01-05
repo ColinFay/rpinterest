@@ -1,17 +1,28 @@
-Package: rpinterest
 Type: Package
+Package: rpinterest
 Title: Access Pinterest API
-Version: 0.3.1
-Date: 2016-08-17
-Author: Colin FAY
-Maintainer: Colin FAY <contact@colinfay.me>
-Description: Get information (boards, pins and
-    users) from the Pinterest <http://www.pinterest.com>
-    API.
-License: GPL-3
-LazyData: TRUE
+Version: 0.4.0
+Authors@R:
+    person(given = "Colin",
+           family = "Fay",
+           role = c("cre", "aut"),
+           email = "colin@thinkr.fr",
+           comment = structure("0000-0001-7343-1846", .Names = "ORCID"))
+Description: Get information (boards, pins and users) from the
+    Pinterest <http://www.pinterest.com> API.
+License: MIT + file LICENSE
 Imports:
+    attempt,
+    curl,
     httr,
-    rjson, 
+    jsonlite,
     magrittr
-RoxygenNote: 5.0.1
+Suggests: 
+    knitr,
+    rmarkdown,
+    testthat
+VignetteBuilder: 
+    knitr
+Encoding: UTF-8
+LazyData: TRUE
+RoxygenNote: 6.1.0
