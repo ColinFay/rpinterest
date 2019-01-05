@@ -1,39 +1,126 @@
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
 # rpinterest
 
-This package requests information from the Pinterest API.
+The goal of rpinterest is to provide access to the Pinterest API from R.
 
-rpinterest is now on [CRAN](https://cran.r-project.org/web/packages/rpinterest/index.html)
+## Installation
 
-## Access the API 
+You can install the released version of rpinterest from
+[CRAN](https://CRAN.R-project.org) with:
 
-In order to get information from the API, you first need to get an access token from the [Pinterest token generator](https://developers.pinterest.com/tools/access_token/).
-
-## Install rpinterest
-
-Install this package directly in R : 
-
-```{r}
-devtools::install_github("ColinFay/rpinterest")
+``` r
+install.packages("rpinterest")
 ```
 
-## How rpinterest works
+Or for the dev version:
 
-The version 0.1.0 works with seven functions. Which are :  
+``` r
+remotes::install_github("ColinFay/rpinterest")
+```
 
-* `BoardPinsByID` Get information about all the pins on a pinterest board using the board ID.
+## Getting an Access Token
 
-* `BoardPinsByName` Get information about all the pins on a pinterest board using the board name.
+Go to `https://developers.pinterest.com/apps/` and register a new app.
+In this new app, use `https://colinfay.me/rpinterestcallback/` as a
+callback URL. You can also use a custom callback if you build your own.
+Read the Vignette “rpinterest-oauth” for more info about the why and the
+how.
 
-* `BoardSpecByID` Get information about a pinterest board using the board ID.
+Once your app is set, use pinterest\_token to create a token:
 
-* `BoardSpecByName` Get information about a pinterest board using the board name.
+``` r
+token <- pinterest_token(
+  app = "yourapp", 
+  app_id = "yourappid", 
+  app_secret = "yourappsecret"
+)
+```
 
-* `PinSpecByID` Get information about a pinterest pin using the pin ID.
+You’ll be taken to a Pinterest login page and R will be waiting for a
+connection code. After login, `https://colinfay.me/rpinterestcallback/`
+will contain a code that you’ll need to paste back to R.
 
-* `UserSpecByID` Get information about a pinterest user using the user ID.
+## About rate limit
 
-* `UserSpecNyName` Get information about a pinterest user using the user name.
+If your pinterest app is unauthorised, you’ll be granted 10 requests per
+hour per token.
 
-### Contact
+## Call the API
 
-Questions and feedbacks [welcome](mailto:contact@colinfay.me) !
+### Boards
+
+#### Pins
+
+Get all the pins from a board:
+
+  - by id
+
+<!-- end list -->
+
+``` r
+get_board_pins_by_id(id = "42080646457333782", token = token)
+```
+
+  - by
+name
+
+<!-- end list -->
+
+``` r
+get_board_pins_by_name(user = "colinfay", board = "blanc-mon-amour", token = token)
+```
+
+#### Spec
+
+  - by id
+
+<!-- end list -->
+
+``` r
+get_board_spec_by_id(id = "42080646457333782", token = token)
+```
+
+  - by
+name
+
+<!-- end list -->
+
+``` r
+get_board_spec_by_name(user = "colinfay", board = "blanc-mon-amour", token = token)
+```
+
+### Pins
+
+#### Spec
+
+``` r
+get_pin_spec_by_id(id = "42080577745042298", token = "your_token")
+```
+
+### User
+
+#### Spec
+
+  - by id
+
+<!-- end list -->
+
+``` r
+get_user_spec_by_id(id = "42080715176677612", token = token)
+```
+
+  - by name
+
+<!-- end list -->
+
+``` r
+get_user_spec_by_name(user = "colinfay", token = token)
+```
+
+## Code of Conduct
+
+Please note that the ‘rpinterest’ project is released with a
+[Contributor Code of Conduct](CODE_OF_CONDUCT.md). By contributing to
+this project, you agree to abide by its terms.
