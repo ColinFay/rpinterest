@@ -12,9 +12,10 @@ knitr::opts_chunk$set(
   out.width = "100%"
 )
 ```
+
 # rpinterest
 
-The goal of rpinterest is to ...
+The goal of rpinterest is to provide access to the Pinterest API from R. 
 
 ## Installation
 
@@ -108,3 +109,7 @@ get_user_spec_by_id(id = "42080715176677612", token = token)
 ``` r 
 get_user_spec_by_name(user = "colinfay", token = token)
 ```
+
+## Code of Conduct
+
+ Please note that the 'rpinterest' project is released with a [Contributor Code of Conduct](CODE_OF_CONDUCT.md). By contributing to this project, you agree to abide by its terms.
