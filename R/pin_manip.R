@@ -28,8 +28,9 @@ create_pin <- function(file, board, note, link = NULL, token){
       image_base64 = base64enc::base64encode(file)
     )
   )
+  check_status(res)
   res <- json_raw_to_char(res$content)$data
-  res
+  pin_spec_to_df(res)
 }
 
 #' @export

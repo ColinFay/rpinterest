@@ -11,11 +11,12 @@ json_raw_to_char <- function(content){
   fromJSON(rawToChar(content), flatten = TRUE)
 }
 
+`%not_in%` <- Negate(`%in%`)
 #' @importFrom httr status_code
 #' @importFrom attempt message_if_not
 
 check_status <- function(res){
-  if (status_code(res) != 200){
+  if (status_code(res) %not_in%  200:201){
     print(json_raw_to_char(res$content))
     stop("The API returned an error")
   }
@@ -66,8 +67,7 @@ pin_spec_to_df <- function(content){
          metadata_link_title = content$metadata$metadata$link$title %||% NA, 
          metadata_link_site_name= content$metadata$metadata$link$site_name %||% NA, 
          metadata_link_description = content$metadata$metadata$link$description %||% NA, 
-         metadata_link_favicon = content$metadata$metadata$link$favicon %||% NA, 
-         stringsAsFactors = FALSE)
+         metadata_link_favicon = content$metadata$metadata$link$favicon %||% NA)
 }
 
 board_spec_to_df <- function(content){
