@@ -1,13 +1,17 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# rpinterest
+# `{rpinterest}`
 
 The goal of rpinterest is to provide access to the Pinterest API from R.
 
+`{rpinterest}` is designed to either retrieve data from Pinterest or to
+post to your account from R. For exemple, you can share a dataviz made
+in R to Pinterest (or any other file from your computer).
+
 ## Installation
 
-You can install the released version of rpinterest from
+You can install the released version of `{rpinterest}` from the
 [CRAN](https://CRAN.R-project.org) with:
 
 ``` r
@@ -49,18 +53,42 @@ hour per token.
 
 ## Call the API
 
-## Logged User
+### Interact with your profile
 
-### Get informations about the user
+#### Get informations about the logged user
 
-``` r
-get_logged_user(token)
-get_logged_user_boards(token)
-```
+Get information about your account :
 
-### Boards
+  - `get_logged_user()`, `get_logged_user_boards()`, and
+    `get_logged_user_boards_suggestions()` return informations about
+    yourself.
 
-#### Pins
+#### Interact with your account
+
+##### Create
+
+  - `create_board()` creates a board on your account, with a name and a
+    description.
+  - `create_pin()` creates a pin on one of your board, with a name and a
+    description, from a local file.
+
+##### Delete
+
+  - `delete_board()` delete a board on your account.
+  - `delete_pin()` delete on one of your pin.
+
+##### Edit
+
+  - `edit_board()` edit a board on your account, with a name and a
+    description.
+  - `edit_pin()` creates a pin on one of your board, with a name and a
+    description, from a local file.
+
+### Retrieve data from Pinterest
+
+#### Boards
+
+##### Pins
 
 Get all the pins from a board:
 
@@ -81,7 +109,7 @@ name
 get_board_pins_by_name(user = "colinfay", board = "blanc-mon-amour", token = token)
 ```
 
-#### Spec
+##### Spec
 
   - by id
 
@@ -100,17 +128,17 @@ name
 get_board_spec_by_name(user = "colinfay", board = "blanc-mon-amour", token = token)
 ```
 
-### Pins
+#### Pins
 
-#### Spec
+##### Spec
 
 ``` r
 get_pin_spec_by_id(id = "42080577745042298", token = "your_token")
 ```
 
-### User
+#### User
 
-#### Spec
+##### Spec
 
   - by id
 

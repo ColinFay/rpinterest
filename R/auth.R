@@ -10,7 +10,6 @@
 #' @export
 #'
 #' @importFrom httr POST
-#' @importFrom glue glue
 #' @importFrom utils browseURL
 
 pinterest_token <- function(app, app_id, app_secret, verbose = TRUE, 
@@ -24,13 +23,15 @@ pinterest_token <- function(app, app_id, app_secret, verbose = TRUE,
   }
   
   # Getting app_id & callback
-  url <- glue("https://api.pinterest.com/oauth/?response_type=code&redirect_uri={callback}&client_id={app_id}&scope=read_public,write_public&state=28111988")
+  url <- paste0("https://api.pinterest.com/oauth/?response_type=code&redirect_uri=", callback,"&client_id=",app_id,"&scope=read_public,write_public&state=28111988")
   browseURL(url)
   
   code <- readline("Paste the code here: ")
   
   # Posting the code, app_id and app_secret
-  token <- POST(glue("https://api.pinterest.com/v1/oauth/token?grant_type=authorization_code&client_id={app_id}&client_secret={app_secret}&code={code}"))
+  token <- POST(
+    paste0("https://api.pinterest.com/v1/oauth/token?grant_type=authorization_code&client_id=",app_id,"&client_secret=",app_secret,"&code=", code)
+    )
   
   # Parsing the result
   json_raw_to_char(token$content)$access_token

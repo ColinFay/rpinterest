@@ -3,17 +3,22 @@
 \name{get_logged_user}
 \alias{get_logged_user}
 \alias{get_logged_user_boards}
+\alias{get_logged_user_boards_suggestions}
 \title{Get Information about the logged user}
 \usage{
 get_logged_user(token)
 
 get_logged_user_boards(token)
+
+get_logged_user_boards_suggestions(count = 25, token)
 }
 \arguments{
 \item{token}{a character string with an access token generated with `pinterest_token()`}
+
+\item{count}{for suggestions, the max number of suggestion to retrieve.}
 }
 \value{
-a data.frame
+Either a data.frame, or an error.
 }
 \description{
 Get user information about their account or about
@@ -23,5 +28,6 @@ their boards.
 \dontrun{
 get_logged_user(token)
 get_logged_user_boards(token)
+get_logged_user_boards_suggestions(token = token)
 }
 }

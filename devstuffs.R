@@ -11,6 +11,7 @@ use_package("curl")
 use_package("attempt")
 use_package("data.table")
 use_package("glue")
+use_package("base64enc")
 
 usethis::use_vignette("rpinterest-auth")
 

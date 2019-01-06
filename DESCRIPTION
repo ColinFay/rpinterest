@@ -17,7 +17,7 @@ Imports:
     data.table,
     httr,
     jsonlite,
-    glue
+    base64enc
 Suggests: 
     knitr,
     rmarkdown,
