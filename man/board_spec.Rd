@@ -2,26 +2,31 @@
 % Please edit documentation in R/board_spec.R
 \name{get_board_spec_by_id}
 \alias{get_board_spec_by_id}
-\title{Get board spec using its ID}
+\alias{get_board_spec_by_name}
+\title{Retrieve information about a Board}
 \usage{
 get_board_spec_by_id(id, token)
+
+get_board_spec_by_name(user, board, token)
 }
 \arguments{
 \item{id}{a character string with a board ID.}
 
 \item{token}{a character string with an access token generated with `pinterest_token()`}
+
+\item{user}{a character string with a user name.}
+
+\item{board}{a character string with a board name.}
 }
 \value{
-Always returns a data.frame, with a warning when appropriate.
+Either a data.frame, or an error.
 }
 \description{
-Get information about a pinterest board using the board ID.
-}
-\details{
-Takes a board ID and an access token, returns a data.frame.
+Get information about a pinterest board using the board ID or the name/user combination.
 }
 \examples{
 \dontrun{
 get_board_spec_by_id(id = "42080646457333782", token = token)
+get_board_spec_by_name(user = "colinfay", board = "blanc-mon-amour", token = token)
 }
 }

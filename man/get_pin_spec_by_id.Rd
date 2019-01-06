@@ -2,7 +2,7 @@
 % Please edit documentation in R/pin_spec.R
 \name{get_pin_spec_by_id}
 \alias{get_pin_spec_by_id}
-\title{Get pin using its ID}
+\title{Return information about a Pin}
 \usage{
 get_pin_spec_by_id(id, token)
 }
@@ -12,16 +12,14 @@ get_pin_spec_by_id(id, token)
 \item{token}{a character string with an access token generated with `pinterest_token()`}
 }
 \value{
-Always returns a data.frame, with a warning when appropriate.
+Either a data.frame, or an error.
 }
 \description{
 Get information about a pinterest pin using the pin ID.
-}
-\details{
-Takes a pin ID and an access token, returns a data.frame.
 }
 \examples{
 \dontrun{
 get_pin_spec_by_id(id = "42080577745042298", token = token)
 }
+
 }
