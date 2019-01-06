@@ -23,3 +23,18 @@ json_raw_to_char <- function(content){
   fromJSON(rawToChar(content), flatten = TRUE)
 }
 
+df_tbl <- function(...){
+  x <- data.frame(..., stringsAsFactors = FALSE)
+  structure(clean_names(x), class = c("tbl_df", "tbl", "data.frame"))
+}
+
+as_tbl <- function(x){
+  x <- as.data.frame(x, stringsAsFactors = FALSE)
+  structure(clean_names(x), class = c("tbl_df", "tbl", "data.frame"))
+}
+
+clean_names <- function(x){
+  old_names <- tolower(names(x))
+  old_names <- gsub("\\.", "_", old_names)
+  setNames(x, old_names)
+}

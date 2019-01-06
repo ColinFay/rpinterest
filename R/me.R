@@ -22,7 +22,8 @@ get_logged_user <- function(token){
            token,"&fields=first_name%2Cid%2Clast_name%2Curl")
   )
   check_status(res)
-  as.data.frame(json_raw_to_char(res$content)$data)
+  
+  as_tbl(json_raw_to_char(res$content)$data)
 }
 
 #' @rdname get_logged_user
@@ -34,5 +35,5 @@ get_logged_user_boards <- function(token){
            token,"&fields=id%2Cname%2Curl%2Ccounts%2Ccreated_at%2Ccreator%2Cdescription%2Cimage%2Cprivacy%2Creason")
   )
   check_status(res)
-  as.data.frame(json_raw_to_char(res$content)$data)
+  as_tbl(json_raw_to_char(res$content)$data)
 }
