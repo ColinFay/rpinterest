@@ -17,8 +17,10 @@ Imports:
     data.table,
     httr,
     jsonlite,
-    base64enc
+    base64enc,
+    stats
 Suggests: 
+    ggplot2,
     knitr,
     rmarkdown,
     testthat
