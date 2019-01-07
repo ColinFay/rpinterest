@@ -1,6 +1,9 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
+[![Travis build
+status](https://travis-ci.org/ColinFay/rpinterest.svg?branch=master)](https://travis-ci.org/ColinFay/rpinterest)
+
 # `{rpinterest}`
 
 The goal of rpinterest is to provide access to the Pinterest API from R.
