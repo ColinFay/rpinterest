@@ -37,7 +37,6 @@ create_pin <- function(file, board, note, link = NULL, token){
 #' @rdname pin_manip
 
 delete_pin <- function(id, token){
-  #browser()
   check_internet()
   url <- paste0("https://api.pinterest.com/v1/pins/",id,"/?access_token=", token)
   res <- httr::DELETE(url)
@@ -49,7 +48,6 @@ delete_pin <- function(id, token){
 #' @rdname pin_manip
 
 edit_pin <- function(id, board = NULL, note = NULL, link = NULL, token){
-  browser()
   check_internet()
   url <- paste0("https://api.pinterest.com/v1/pins/", id, "/?access_token=", token,"&fields=id%2Clink%2Cnote%2Curl%2Cattribution%2Cboard%2Ccolor%2Ccounts%2Ccreated_at%2Ccreator%2Cimage%2Cmedia%2Cmetadata%2Coriginal_link")
   res <- httr::PATCH(
