@@ -16,7 +16,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-## Getting an Access Token 
+# Getting an Access Token 
 
 Go to `https://developers.pinterest.com/apps/` and register a new app. In this new app, use `https://colinfay.me/rpinterestcallback/` as a callback URL. You can also use a custom callback if you build your own. Read the Vignette "rpinterest-oauth" for more info about the why and the how. 
 
@@ -36,22 +36,49 @@ You'll be taken to a Pinterest login page and R will be waiting for a connection
 
 If your pinterest app is unauthorised, you'll be granted 10 requests per hour per token. 
 
-
 ## Call the API 
 
-## Logged User
+### Interact with your profile
 
-### Get informations about the user
+#### Get informations about the logged user
+
+Get information about your account : 
+
++ `get_logged_user()`, `get_logged_user_boards()`, and `get_logged_user_boards_suggestions()` return informations about yourself. 
+
+#### Interact with your account 
+
+##### Create
+
++ `create_board()` creates a board on your account, with a name and a description.
++ `create_pin()` creates a pin on one of your board, with a name and a description, from a local file.
+
+##### Delete 
+
++ `delete_board()` delete a board on your account.
++ `delete_pin()` delete on one of your pin.
+
+##### Edit 
+
++ `edit_board()` edit a board on your account, with a name and a description.
++ `edit_pin()` creates a pin on one of your board, with a name and a description, from a local file.
+
+### Sending plots to Pinterest
+
+`ggplot_to_pinterest()` sends a ggplot2 object to a Pinterest Board. Note that `{ggplot2}` has to be installed to run this command.
 
 ``` r
-get_logged_user(token)
-get_logged_user_boards(token)
+library(ggplot2)
+x <- ggplot(iris, aes(Sepal.Length, Sepal.Width)) + geom_point()
+ggplot_to_pinterest(x, "colinfay/gris-mon-amour", "test rpinterest", token = token)
 ```
 
 
-### Boards
+### Retrieve data from Pinterest
 
-#### Pins 
+#### Boards
+
+##### Pins 
 
 Get all the pins from a board:
 
@@ -67,7 +94,7 @@ get_board_pins_by_id(id = "42080646457333782", token = token)
 get_board_pins_by_name(user = "colinfay", board = "blanc-mon-amour", token = token)
 ```
 
-#### Spec
+##### Spec
 
 + by id 
 
@@ -81,17 +108,17 @@ get_board_spec_by_id(id = "42080646457333782", token = token)
 get_board_spec_by_name(user = "colinfay", board = "blanc-mon-amour", token = token)
 ```
 
-### Pins
+#### Pins
 
-#### Spec
+##### Spec
 
 ``` r
 get_pin_spec_by_id(id = "42080577745042298", token = "your_token")
 ```
 
-### User 
+#### User 
 
-#### Spec
+##### Spec
 
 + by id
 
