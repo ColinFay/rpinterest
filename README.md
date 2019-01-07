@@ -21,7 +21,7 @@ install.packages("rpinterest")
 Or for the dev version:
 
 ``` r
-remotes::install_github("ColinFay/rpinterest")
+remotes::install_github("ColinFay/rpinterest", build_vignettes = TRUE)
 ```
 
 ## Getting an Access Token
@@ -83,6 +83,17 @@ Get information about your account :
     description.
   - `edit_pin()` creates a pin on one of your board, with a name and a
     description, from a local file.
+
+### Sending plots to Pinterest
+
+`ggplot_to_pinterest()` sends a ggplot2 object to a Pinterest Board.
+Note that `{ggplot2}` has to be installed to run this command.
+
+``` r
+library(ggplot2)
+x <- ggplot(iris, aes(Sepal.Length, Sepal.Width)) + geom_point()
+ggplot_to_pinterest(x, "colinfay/gris-mon-amour", "test rpinterest", token = token)
+```
 
 ### Retrieve data from Pinterest
 

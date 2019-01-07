@@ -17,7 +17,6 @@
 
 #' 
 get_pin_spec_by_id <- function(id, token) {
-  browser()
   url <- paste0("https://api.pinterest.com/v1/pins/", id, "/?access_token=", token, "&fields=id%2Clink%2Cnote%2Curl%2Cattribution%2Cboard%2Ccounts%2Ccolor%2Ccreated_at%2Ccreator%2Cmedia%2Cimage%2Cmetadata%2Coriginal_link")
   check_internet()
   res <- GET(url)

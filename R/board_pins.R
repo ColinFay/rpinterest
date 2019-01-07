@@ -37,7 +37,6 @@ get_board_pins_by_name <- function(user, board, token){
 #' @importFrom httr GET
 get_board_pins <- function(url){
   check_internet()
-  #browser()
   res <- GET(url)
   check_status(res)
   content <- json_raw_to_char(res$content)

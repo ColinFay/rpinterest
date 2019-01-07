@@ -17,7 +17,6 @@
 #' edit_board("colinfay/testboard",description = "A new desc", token = token)
 #' }
 create_board <- function(name, description,  token){
-  browser()
   check_internet()
   url <- paste0("https://api.pinterest.com/v1/boards/?access_token=", token,"&fields=id%2Cname%2Curl%2Ccounts%2Ccreated_at%2Ccreator%2Cimage%2Cdescription%2Cprivacy%2Creason")
   res <- httr::POST(

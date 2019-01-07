@@ -23,7 +23,7 @@ check_status <- function(res){
   
 }
 
-
+#' @importFrom stats setNames
 clean_names <- function(x){
   old_names <- tolower(names(x))
   old_names <- gsub("\\.", "_", old_names)
